@@ -1,23 +1,15 @@
 (function() {
   
   window.getStream = function(cb) {
-    var keys = ['getUserMedia', 'webkitGetUserMedia', 'mozGetUserMedia',
-      'msGetUserMedia'];
     var getUserMedia = null;
-    for (var i = 0, len = keys.length; i < len; ++i) {
-      var key = keys[i];
-      getUserMedia = navigator[key];
-      if (getUserMedia) {
-        break;
-      }
-    }
+    getUserMedia = navigator.mediaDevices.getUserMedia({audio:false,video:true});
     if (!getUserMedia) {
       setTimeout(function() {
         cb('Camera unavailable', null);
       }, 10);
       return;
     }
-    getUserMedia.call(navigator, {video: true, audio: false}, function(stream) {
+    getUserMedia.then(function(stream) {
       cb(null, stream);
     }, function(error) {
       cb(error || 'Unknown error', null);
@@ -25,8 +17,15 @@
   };
   
   window.playStream = function(videoTag, stream, cb) {
-    videoTag.src = (window.URL ? window.URL.createObjectURL(stream) : stream);
-    videoTag.play();
+    try {
+	  videoTag.srcObject = stream;
+	}
+	catch (e) {
+	  videoTag.src = URL.createObjectURL(stream);
+	}
+	videoTag.onloadedmetadata = function(e) {
+	  videoTag.play();
+	};
     videoTag.addEventListener('canplay', function() {
       if (cb) {
         cb(null);
@@ -41,7 +40,7 @@
     });
   };
   
-  window.getFrames = function(videoTag, cb) {
+  window.getFrames = function(videoTag, cb, diff) {
     var canvas = document.createElement('canvas');
     var width = videoTag.videoWidth;
     var height = videoTag.videoHeight;
@@ -64,7 +63,7 @@
       ctx.drawImage(videoTag, 0, 0, width, height);
       cb(ctx.getImageData(0, 0, width, height).data, width, height);
     };
-    intervalId = setInterval(intervalFunc, 100);
+    intervalId = setInterval(intervalFunc, diff);
     return cancelFunc;
   };
   
