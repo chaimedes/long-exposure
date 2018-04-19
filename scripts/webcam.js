@@ -1,4 +1,6 @@
 (function() {
+	
+	var stream_handle = null;
   
   window.getStream = function(cb) {
     var getUserMedia = null;
@@ -11,6 +13,7 @@
     }
     getUserMedia.then(function(stream) {
       cb(null, stream);
+	  stream_handle = stream;
     }, function(error) {
       cb(error || 'Unknown error', null);
     });
@@ -53,6 +56,7 @@
         clearInterval(intervalId);
         intervalId = null;
       }
+	  stream_handle.getTracks()[0].stop();
     };
     var intervalFunc = function() {
       if (videoTag.paused || videoTag.ended) {
