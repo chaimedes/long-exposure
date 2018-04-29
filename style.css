@@ -1,0 +1,48 @@
+body {
+	/*font-family: "Verdana", sans-serif;*/
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+#controls {
+	padding: 60px 20px;
+	font-size: 1.2em;
+	background: #f9fff9;
+	text-align: center;
+	/* box-shadow: 0px 0px 3px -2px #000; */
+	border-top: 1px solid #eee;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 1px solid #eee;
+}
+#controls input {
+	padding: 5px;
+}
+#controls div {
+	margin: 5px;
+}
+header {
+	text-align: center;
+}
+#controls {
+	max-width: 50%;
+	margin: auto;
+}
+#start-stop {
+	font-size: 1.2em;
+	background: #fff;
+	box-shadow: 0px 0px 3px 0px #000;
+	padding: 10px 26px;
+	margin: 16px 0px 0px 0px;
+	border: 0px;
+}
+#canvas {
+	margin: 20px auto;
+	display: block;
+}
+aside {
+	margin: auto;
+	width: 45%;
+	margin-bottom: 40px;
+}
+aside p {
+	color: #999;
+}

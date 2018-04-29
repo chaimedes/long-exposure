@@ -4,44 +4,16 @@
     <meta charset="UTF-8">
     <script src="scripts/webcam.js"></script>
     <script src="scripts/main.js"></script>
-	<style type="text/css">
-	body {
-		font-family: "Verdana", sans-serif;
-	}
-	#controls {
-		border: 2px solid #ccc;
-		padding: 20px;
-		font-size: 1.2em;
-	}
-	#controls input {
-		padding: 5px;
-	}
-	#controls div {
-		margin: 5px;
-	}
-	header {
-		text-align: center;
-	}
-	#controls {
-		max-width: 50%;
-		margin: auto;
-	}
-	#start-stop {
-		font-size: 1.2em;
-		background: #fff;
-		padding: 5px 10px;
-	}
-	#canvas {
-		margin: 20px auto;
-		display: block;
-	}
-	</style>
+	<link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
     <video id="video" style="display: none"></video>
 	<header>
 		<h1>Webcam Long-Exposure</h1>
 	</header>
+	<aside>
+		<p>Use a webcam to take long-exposure pictures. In effect, this is grabbing frames from a stream and superimposing them to form one overall picture.</p><p>Select the frequency at which frames should be grabbed, and the total amount of time to record for. Fewer frames and a longer duration may be appropriate to compose a typical long-exposure format photograph, while a smaller time frame with a proportionately higher rate can produce an effect similar to multiple exposure.</p><p>Finally, you can choose whether to normalize the light in the picture, compensating for the superimposed stills. In most scenarious you will likely want this checked, as otherwise the end result will be heavily overexposed, probably just a white blank image.</p><p>However in some cases, such as extremely low light, you might wish to uncheck this option and have each frame applied directly atop the previous.</p>
+	</aside>
     <div id="controls">
 		<div>Grab one frame every <input id="exposure" type="number" value="1" min="1" max="3600" style="width:4em;" /> seconds.</div>
 		<div>Record for a total of <input id="duration" type="number" value="10" min="1" max="86400" style="width:5em;" /> seconds.</div>
